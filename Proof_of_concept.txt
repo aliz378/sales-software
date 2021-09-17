@@ -1,4 +1,0 @@
-Prebas de concepto
-1.Creacion del archivo .txt
-2. Creación de la rama "release".
-3. Prueba de modificación del texto Proof_of_content desde esta nueva rama.
