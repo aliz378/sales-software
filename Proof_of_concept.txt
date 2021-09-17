@@ -1,3 +1,2 @@
 Prebas de concepto
 1.Creacion del archivo .txt
-2. Creación branch "release" y modificación del archivo .txt desde rama "development".
