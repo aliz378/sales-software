@@ -1,0 +1,9 @@
+Prueba de concepto: Adrián Felipe Rueda Castellanos
+-Hola. Esta es una prueba de concepto que servirá como evidencia para demostrar un conocimiento básico de comandos GIT HUB.
+
+Lo edité de manera local para luego, mediante los comandos git add.; git commit -m y git push.
+
+1.Se creó el archivo .txt
+2. Mediante los comandos de git, se anexó  este archivo a la rama release.
+4. Luego de esto, y desde la rama development, se hizo un merge para tener alojado este archivo en la rama development,
+4. Se borró el archivo desde la rama release, quedando una sola copia en la rama development.
