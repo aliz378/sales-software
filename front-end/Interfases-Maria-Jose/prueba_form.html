@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/prueba_form.css">
+</head>
+<body>
+    <div class="contact_form">
+
+        <div class="formulario">      
+          <h1>Formulario de contacto</h1>
+   
+              <form action="submeter-formulario.php" method="post">       
+                <p>
+                    <label for="Identificador de usuario" class="colocar_nombre">Identificador de usuario:
+                      <span class="obligatorio">*</span>
+                    </label>
+                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese rol de usuario">
+                  </p>
+                <p>
+                    <label for="Nombre del usuario" class="colocar_nombre">Nombre
+                      <span class="obligatorio">*</span>
+                    </label>
+                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese nombre del empleado">
+                  </p>
+                  <p>
+                    <label for="Rol de usuario" class="colocar_mensaje">Rol de usuario
+                      <span class="obligatorio">*</span>
+                    </label>                     
+                    <select name="rol" required>
+                        <option value="">Seleccione un rol</option>                
+                        <option>Vendedor</option>                
+                        <option>Operario</option>                
+                        <option>Administrador</option>                
+                        <option>Director</option>
+                      </select> 
+                    </p>   
+                 
+                    <button type="submit" name="enviar_formulario" id="enviar"><p>Enviar</p></button>
+                     <p class="aviso">
+                      <span class="obligatorio"> * </span>los campos son obligatorios.
+                    </p>          
+                
+              </form>
+        </div>  
+      </div>
+    
+</body>
+</html>
