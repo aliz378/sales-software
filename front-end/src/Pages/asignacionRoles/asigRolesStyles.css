@@ -1,0 +1,225 @@
+.profile{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(160, 160, 160, 0.2);
+    display: grid;
+    grid-template-columns:  320px auto;  
+    grid-template-rows: 62px auto; 
+}
+.navbar{
+    grid-row-start: 1;
+    grid-column-start: 2;
+}
+.asigRol-container{
+    grid-row-start: 2;
+    grid-column-start: 2;
+    
+    margin: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    
+    display: block;
+    text-align: center;
+}
+.asigRol-container img{
+    width: 25%;
+}
+.asigRol-container h1{
+    top: 44%;
+    left: 50%;
+}
+.asigRol-container .data{
+    padding: 20px;
+
+    font-size: 25px;
+
+    display: flex;
+    justify-content: space-around;
+    text-align: start;
+}
+.data .info{
+    font-weight: lighter;
+}
+.contact_form{  
+    position: absolute;
+    width: 460px; 
+    height: auto;
+  
+    margin-left: 200px;
+    border-radius: 10px;  
+    padding-top: 20px;
+    padding-bottom: 20px;  
+    background-color: #fbfbfb; 
+    padding-left: 30px; 
+  }
+  
+  
+  input{
+    background-color: #fbfbfb; 
+    width: 408px; 
+    height: 40px; 
+    border-radius: 5px;  
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #1C77CB; 
+    padding-left: 10px;
+    margin-bottom: 10px; 
+  }
+  
+  
+  label{
+    display: block; 
+    float: center;  
+  }
+  
+  
+  .button-users{
+    height: 45px; 
+    padding-left: 5px;
+    padding-right: 5px; 
+    padding-top: 10px;  
+    margin-bottom: 20px;   
+    text-transform: uppercase;
+    background-color: #121F60; 
+    border-color: #121F60; 
+    border-style: solid; 
+    border-radius: 10px;  
+    width: 420px;   
+    cursor: pointer;
+    color: #fff; 
+  }
+  .button-users{
+  background-color: #D7C3FF; 
+  }
+  
+  
+  button p{
+    color: #fff; 
+  }
+  button p:hover{
+    color: #212121; 
+  }
+  
+  
+  span{
+    color: #121F60; 
+  }
+  
+  
+  .aviso{
+    font-size: 13px;  
+    color: #0e0e0e;  
+  }
+  
+ .p-users{
+    font-size: 14px; 
+    color: #0e0e0e; 
+  }
+  
+  ::-webkit-input-placeholder {
+   color: #a8a8a8;
+  }
+  
+  ::-webkit-textarea-placeholder {
+   color: #a8a8a8;
+  }
+  
+  .formulario input:focus{
+    outline:0;
+    border: 1px solid #D7C3FF;
+  }
+  
+  
+  .formulario select:focus{
+    outline:0;
+    border: 1px solid #D7C3FF;
+  }
+  .buttonMaestro{
+    height: 45px; 
+    padding-left: 2px;
+    padding-right: 2px;   
+    text-transform: uppercase;
+    background-color: #121F60; 
+    border-color: #121F60; 
+    border-style: solid; 
+    border-radius: 10px;  
+    width: 100px;   
+    cursor: pointer;
+    color: #fff; 
+  }
+  buttonMaestro:hover{
+    background-color: #D7C3FF; 
+    }
+
+  #menu ul li{
+      position: relative;
+      left: 70px;
+      top: 180px;
+      font-family: Raleway;
+      font-style: normal;
+      font-weight: 400px;
+      font-size: 30px;
+      line-height: 60px;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.017em;
+      color: #FFFFFF;
+      list-style: none;
+  }
+    
+  #menu ul li a:hover{
+      position: relative;
+      left: 70px;
+      top: 180px;
+      color: #212121;
+      background: rgba(215, 195, 255, 0.6);
+      border: 1px solid rgba(215, 196, 255, 0.6);
+      box-sizing: border-box;        
+  }
+  .button-menu{
+      position: relative;
+      left: 120px;
+      top: 200px;
+      font-family: Raleway;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 35px;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.017em;    
+      color: #FFFFFF;
+      background-color: #121F60;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+      padding: 20px;
+  }
+  .button-menu:hover{
+      background: rgba(215, 195, 255, 0.6);
+      border: 1px solid #121F60;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+  }
+ 
+  .campo-datos{
+      margin-top: 30px;
+      width: 926px;
+      height: 720px;
+      left: 455px;
+      top: 129px;
+      background: #FFFFFF;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+  }
+  #img-gestion-usuarios{
+    position: relative;
+    width: 200px;
+    left: 320px;
+    top: 50px;
+}
+

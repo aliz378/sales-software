@@ -8,7 +8,9 @@ const sidebar = () => {
         <div className="sidebar">
             <h2 className="logo">App</h2>
             <ul className="options">
+            <Link to='/gestionUsers' style={{ textDecoration: 'none' }}>
                 <ol> Gestión de usuarios </ol>
+                </Link>
                 <ol> Registro de productos </ol>
                 <ol> Maestro de productos </ol>
                 <ol> Registro de ventas </ol>
