@@ -11,6 +11,9 @@ const sidebar = () => {
             <Link to='/gestionUsers' style={{ textDecoration: 'none' }}>
                 <ol> Gestión de usuarios </ol>
                 </Link>
+                <Link to='/maestroUsers' style={{ textDecoration: 'none' }}>
+                <ol> Maestro de usuarios </ol>
+                </Link>
                 <ol> Registro de productos </ol>
                 <ol> Maestro de productos </ol>
                 <ol> Registro de ventas </ol>
