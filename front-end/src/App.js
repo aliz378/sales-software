@@ -10,6 +10,8 @@ import exitoAsigRoles from './Pages/exitoAsignarRol/exitoAsigRoles';
 import exitoRegUsers from './Pages/exitoRegistroUser/exitoRegUsers';
 import RegistroProducto from './Pages/Productos/RegistroProducto';
 import MaestroProducto from './Pages/Productos/MaestroProducto';
+import MaestroVentas from './Pages/Ventas/MaestroVentas';
+import RegistroVentas from './Pages/Ventas/RegistroVentas';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route exact path="/exitoRegUsers" component={exitoRegUsers}></Route>
         <Route exact path="/Productos" component={RegistroProducto}></Route>
         <Route exact path="/MaestroProductos" component={MaestroProducto}></Route>
+        <Route exact path="/MaestroVentas" component={MaestroVentas}></Route>
+        <Route exact path="/RegistroVentas" component={RegistroVentas}></Route>
         {/* <Route component = {notFound}></Route> */}
       </Switch>
     </BrowserRouter>
