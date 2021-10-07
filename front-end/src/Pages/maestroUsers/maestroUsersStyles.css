@@ -27,9 +27,16 @@
 .maestro-container img{
     width: 25%;
 }
-.maestro-container h1{
-    top: 44%;
-    left: 50%;
+.maestro-container h2{
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  padding-top: 50px;
+  padding-bottom: 10px;
+
+  color: #121F60;
+  font-size: 50px;
+  font-weight: bold;
 }
 .maestro-container .data{
     padding: 20px;

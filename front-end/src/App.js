@@ -8,6 +8,9 @@ import maestroUsers from './Pages/maestroUsers/maestroUsers';
 import asigRoles from './Pages/asignacionRoles/asigRoles';
 import exitoAsigRoles from './Pages/exitoAsignarRol/exitoAsigRoles';
 import exitoRegUsers from './Pages/exitoRegistroUser/exitoRegUsers';
+import RegistroProducto from './Pages/Productos/RegistroProducto';
+import MaestroProducto from './Pages/Productos/MaestroProducto';
+
 
 function App() {
   return (
@@ -21,10 +24,12 @@ function App() {
         <Route exact path="/asigRoles" component={asigRoles}></Route>
         <Route exact path="/exitoAsigRoles" component={exitoAsigRoles}></Route>
         <Route exact path="/exitoRegUsers" component={exitoRegUsers}></Route>
+        <Route exact path="/Productos" component={RegistroProducto}></Route>
+        <Route exact path="/MaestroProductos" component={MaestroProducto}></Route>
         {/* <Route component = {notFound}></Route> */}
       </Switch>
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;
