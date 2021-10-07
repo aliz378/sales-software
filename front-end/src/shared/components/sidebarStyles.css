@@ -14,18 +14,20 @@
     padding: 0;
 
     display: block;
+    justify-content: center;
 }
 .logo{
     margin: 0px;
     padding-left: 30px;
-    padding-top: 100px;
-    padding-bottom: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 
     font-size: 50px;
     font-weight: bolder;
 }
 .options ol{
     margin: 0;
+    padding: 15px;
     height: 70px;
     padding-left: 40px;
 
@@ -45,7 +47,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: all 0.15s;
 }
-.sidebar button{
+.sidebar .logout{
     position: absolute;
     margin: 15px 30px 0 30px;
     padding-top: 10px;
@@ -65,10 +67,10 @@
     border-radius: 10px;
     border-color: rgba(0, 0, 0, 0);
 }
-.sidebar button:hover {
+.sidebar .logout:hover {
     background: rgba(215, 195, 255, 0.6);
 }
-.sidebar button:active {
+.sidebar .logout:active {
     color: white;
     background-color: rgba(215, 195, 255, 0.6);
     box-shadow: 0 2px rgba(215, 195, 255, 0.6);
@@ -80,4 +82,17 @@
     width: 30px;
     color: white;
 }
+@media (max-height: 782px) {
+    .options ol{
+        padding: 25px;
+        height: 40px;
 
+        font-size: 20px;
+    }
+    .logo{
+        padding-top: 40px;
+        padding-bottom: 20px;
+        
+        font-size: 50px;
+    }
+}

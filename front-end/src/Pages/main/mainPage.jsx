@@ -7,7 +7,7 @@ import './mainStyles.css'
 const mainPage = () => {
     const name = 'Administrador 01'
     return (
-        <div className='profile'>
+        <div className='main'>
             <Navbar userName={name}></Navbar>
             <Sidebar></Sidebar> 
             <main className='main-container'>
