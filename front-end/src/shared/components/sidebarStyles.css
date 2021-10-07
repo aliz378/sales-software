@@ -1,0 +1,99 @@
+.sidebar{
+    position: absolute;
+    margin: 0;
+    padding:0;
+    width: 320px;
+    height: 100%;
+
+    background: rgba(18, 31, 96, 0.7);
+    color: white;
+    display: block;
+}
+.options{
+    margin: 0;
+    padding: 0;
+
+    display: block;
+    justify-content: center;
+}
+.logo{
+    margin: 0px;
+    padding-left: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    font-size: 50px;
+    font-weight: bolder;
+}
+.options ol{
+    margin: 0;
+    padding: 15px;
+    height: 70px;
+    padding-left: 40px;
+
+    display: flex; 
+    justify-content: flex-start;
+
+    color: white;
+    font-size: 23px;
+    font-weight: normal;
+    text-decoration: none;
+}
+.options ol:hover{
+    cursor: pointer;
+    color: white;
+    background-color: rgba(215, 195, 255, 0.6);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.15s;
+}
+.sidebar .logout{
+    position: absolute;
+    margin: 15px 30px 0 30px;
+    padding-top: 10px;
+    padding-right: 40px;
+    width: 250px;
+    height: 50px;
+    top: 82%;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: space-around;
+
+    color: white;
+    background-color: rgba(18, 31, 96, 0);
+    border-radius: 10px;
+    border-color: rgba(0, 0, 0, 0);
+}
+.sidebar .logout:hover {
+    background: rgba(215, 195, 255, 0.6);
+}
+.sidebar .logout:active {
+    color: white;
+    background-color: rgba(215, 195, 255, 0.6);
+    box-shadow: 0 2px rgba(215, 195, 255, 0.6);
+    transform: translateY(4px);
+}
+
+
+.sidebar img{
+    width: 30px;
+    color: white;
+}
+@media (max-height: 782px) {
+    .options ol{
+        padding: 25px;
+        height: 40px;
+
+        font-size: 20px;
+    }
+    .logo{
+        padding-top: 40px;
+        padding-bottom: 20px;
+        
+        font-size: 50px;
+    }
+}
+
