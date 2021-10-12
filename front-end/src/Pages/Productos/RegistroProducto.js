@@ -26,7 +26,7 @@ function RegistroProducto() {
                 <div className="formulario">
                 <form id="form-gestion-usuarios" method="get" autocomplete="off"> 
                   <p>
-                    <label for="Identificador de usuario" className="colocar_nombre">Identificador de producto:
+                    <label htmlFor="Identificador de usuario" className="colocar_nombre">Identificador de producto:
                       <span className="obligatorio">*</span>
                     </label>
                       <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese id de Producto"/>

@@ -7,10 +7,10 @@ import Sidebar from '../../shared/components/sidebar';
 import './MaestroProducto.css';
 
 function MaestroProducto() {
-    let name2 = 'Admon2'
+    let name = 'Admon2'
     return (
         <div className = 'MaestroProducto'>
-            <Navbar username = {name2}></Navbar>
+            <Navbar username = {name}></Navbar>
             <Sidebar></Sidebar>
             {/* //CONTENEDOR GRIS */}
             <div className = "registro" >
