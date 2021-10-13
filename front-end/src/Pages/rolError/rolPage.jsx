@@ -1,6 +1,6 @@
 import React from 'react'
-
-const rolPage = () => {
+import './rolStyles.css';
+const RolPage = () => {
     return (
         <div className="containerError">
             <h1>Ups !!</h1>     
@@ -9,4 +9,4 @@ const rolPage = () => {
     )
 }
 
-export default rolPage
+export default RolPage

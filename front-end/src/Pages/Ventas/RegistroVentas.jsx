@@ -1,8 +1,6 @@
 import React from 'react'
 import Navbar from '../../shared/components/navbar'
 import Sidebar from '../../shared/components/sidebar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 const RegistroVentas = () => {
     const name = 'Administrador 01'
@@ -41,7 +39,7 @@ const RegistroVentas = () => {
                             <option value="Nautica"/>
                             <option value="Paco Rabanne"/>
                         </datalist>
-                        <FontAwesomeIcon icon="fa-solid fa-plus" />
+                        {/* <FontAwesomeIcon icon="fa-solid fa-plus" /> */}
                     </div>
                 
                 </div>

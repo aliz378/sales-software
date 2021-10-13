@@ -4,7 +4,7 @@ import Sidebar from '../../shared/components/sidebar'
 import perfil from '../../assets/images/perfiles.jpg';
 import './mainStyles.css'
 
-const mainPage = () => {
+const MainPage = () => {
     const name = 'Administrador 01'
     return (
         <div className='main'>
@@ -30,5 +30,5 @@ const mainPage = () => {
     )
 }
 
-export default mainPage
+export default MainPage
 
