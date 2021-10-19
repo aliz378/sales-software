@@ -1,0 +1,52 @@
+.containerNotFoundUser{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../../assets/images/background-login.png);
+    background-repeat: no-repeat;
+}
+.containerNotFoundUser h1{
+    position: absolute;
+    width: 398px;
+    height: 91px;
+    left: 19%;
+    top: 12%;
+
+    font-weight: bolder;
+    font-size: 80px;
+    line-height: 82px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.017em;
+
+    color: #6D43B1;
+}
+.containerNotFoundUser p{
+    position: absolute;
+    width: 572px;
+    height: 58px;
+    left: 19%;
+    top: 26%;
+
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.017em;
+
+    color: rgba(85, 85, 85, 0.9);
+}
+
+@media (max-height: 600px) {
+    .containerNotFoundUser h1{
+        font-size: 50px;
+    }
+    .containerNotFoundUser p{
+        font-size: 18px;
+    }
+}

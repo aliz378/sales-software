@@ -1,50 +1,71 @@
 import React, { useState, useEffect } from 'react'; // <<--- HOOKS
 import './loginStyles.css';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 function LoginPage() {
-    let assigned = false; 
-    let history = useHistory();
-    let listUsers;
-    /*Cada vez que hay una cambio se guarda la información en username, es util si tengo un formilario donde debo ingresar datos*/
-    const [username, setUserName] = useState("");
-    
-    //4) Recorro mi lista de usuarios 
-    const submitData = () =>{
-        listUsers.map(user =>{
-            if(user.nombre === username){// verifico si mi usuario existe en la tabla
-                if(user.rol !== 'pendiente' && user.estado ==='autorizado') assigned = true;
-            };
-        });
-        //si el usuario existe y tiene rol entonces va a main, si no muestra la página de error
-        (assigned) ? history.push('/main') : history.push('/rolError');
-    }
-    //2) Descarga la información de mi base de datos
-    const getUsers = async () =>{
+    const [validUser, setValidUser] = useState(0);
+
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+
+    const validateUserRole = async() => {
         try{
-            const response = await fetch("http://localhost:3001/get-users");// Hago conexión con mi api y mi api con la Base de datos
+            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
             const jsonResponse = await response.json();
-            listUsers = jsonResponse.data; //Se guarda la lista de usuarios en mi variable listUsers
+            return jsonResponse.data;
         }catch(e){
-            console.log(e)
+            console.log(e);
+            return null;
         }
-        
     }
-    //1)Se llama apenas inicia la página
+
+    const addUser = async() => {
+        const response = await fetch('http://localhost:3001/add-user',{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            nombre:user.name,
+            id:0,
+            telefono:0,
+            email:user.email,            
+            rol:'usuario',
+            estado:'pendiente'
+        })})
+    }
+
+    const grantAccess = async () =>{
+        if(isAuthenticated){
+            const userData = await validateUserRole();
+            if(userData){
+                setValidUser((userData.rol !== 'usuario'&& userData.estado ==='autorizado') ? 1 : 2);
+            }else{
+                addUser();
+                setValidUser(2); 
+            }    
+        }else{
+            setValidUser(0);
+        }
+    }
+    
     useEffect(() => {
-        getUsers();
-    });
+        grantAccess();
+    },[isAuthenticated,validUser]);// eslint-disable-line react-hooks/exhaustive-deps
    
     return (
         <div className="containerLogin">
             <h1>Bienvenido</h1>     
             <p>Comienza a trabajar ahora mismo con un software
                 fácil de usar que te va a encantar</p>      
-            <input type="text" className="nameInit" name="username" required="obligatorio" autoComplete="off"
-            placeholder="Ingrese nombre del usuario" value={username} onChange={e => setUserName(e.target.value)}/>
-            {/* 3)Hago click en iniciar sesión para verificar si mi usuario existe */}
-            <button type="button" className="init" onClick={submitData}> Iniciar sesión </button>
+            <button type="button" className="init" onClick={()=>loginWithRedirect()}> Iniciar sesión </button>
+            {(validUser === 0) ? null : ((validUser === 1) 
+                ? <Redirect to='/main'></Redirect>
+                : ((validUser === 2)
+                ? <Redirect to='/rolError'></Redirect>
+                : <Redirect to='/notFoundUser'></Redirect>))
+            }
         </div>
     )
 }
