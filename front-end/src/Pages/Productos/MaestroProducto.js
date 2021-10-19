@@ -8,6 +8,14 @@ import './MaestroProducto.css';
 
 function MaestroProducto() {
     let name = 'Admon2'
+    // Para agregar los elementos de la tabla de forma automattica
+    const numbers = [1,2,3,4,5];
+    const listItems = numbers.map((number) =>
+        <li>{number}</li>
+
+
+    );
+    //
     return (
         <div className = 'MaestroProducto'>
             <Navbar username = {name}></Navbar>
