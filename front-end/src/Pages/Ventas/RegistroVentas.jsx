@@ -40,7 +40,9 @@ const RegistroVentas = () => {
                             <option value="Nautica"/>
                             <option value="Paco Rabanne"/>
                         </datalist>
+
                         
+
                     </div>
                 
                 </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import user from '../../assets/images/user.png'
 import './navbarStyles.css'
 
-const navbar = (props) => {
+const Navbar = (props) => {
     return (
         <nav className="navbar" >
             <ul className="userName">
@@ -13,4 +13,4 @@ const navbar = (props) => {
     )
 }
 
-export default navbar
+export default Navbar

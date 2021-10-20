@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logout from '../../assets/images/logout.png';
+import { useAuth0 } from "@auth0/auth0-react";
+import logoutIcon from '../../assets/images/logout.png';
 import './sidebarStyles.css'
 
-const sidebar = () => {
+const Sidebar = () => {
+    const { logout } = useAuth0();
     return (
         <div className="sidebar">
             <h2 className="logo">App</h2>
@@ -32,12 +34,11 @@ const sidebar = () => {
                 </Link>
             </ul>
             <Link to='/'>
-            {/* <Link to='/rolerror'> */}
-                <button type="button" className="btn logout">
-                <img src={logout} alt="logout"></img> Cerrar Sesión</button>
+                <button type="button" className="btn logout" onClick={() => logout({ returnTo: window.location.origin })}>
+                <img src={logoutIcon} alt="logout"></img> Cerrar Sesión</button>
             </Link>
         </div>
     )
 }
 
-export default sidebar
+export default Sidebar
