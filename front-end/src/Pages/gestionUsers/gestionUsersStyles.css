@@ -42,8 +42,8 @@
 }
 
 /* ACÁ COMIENZA MI CÓDIGO */
-.contact_formg{  
-  position: absolute;
+.contact_forma{  
+  position: relative;
   width: 480px; 
   left:45%;
   top:30%;

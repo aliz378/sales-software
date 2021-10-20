@@ -62,7 +62,7 @@ app.listen(port, async () =>{
     connection = await mysql.createConnection({
         host : 'localhost',
         user : 'root',
-        password: 'Polaco018*',
+        password: 'root',
         database: 'perfumeria',
         Promise: bluebird
     });
