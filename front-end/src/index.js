@@ -5,8 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 
-const domain =  process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId =  process.env.REACT_APP_AUTH0_CLIENT_ID;
+const domain =  'dev-h39--0tx.us.auth0.com';
+const clientId =  'NpZnSND7bRw61RFpwQPNrfom1ER4B8Ds';
 
 ReactDOM.render(
   <Auth0Provider
@@ -23,3 +23,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
