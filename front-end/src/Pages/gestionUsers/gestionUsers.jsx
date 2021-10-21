@@ -11,6 +11,7 @@ const GestionUsers = () => {
     const { user } = useAuth0();
     // const [listUsuarios, setUsuarios] = useState([]);
     const [name, setName] = useState("");
+<<<<<<< HEAD
     const [nombre, setNombre] = useState("");
     const [permiso, setPermiso] = useState(false);
     const [usuario, setUsuario] = useState({
@@ -20,6 +21,35 @@ const GestionUsers = () => {
         rol:'',
         estado:''
     });
+=======
+    const [permiso, setPermiso] = useState(false);
+    
+    const [nombre, setNombre] = useState("");
+    const [telefono, setTelefono] = useState(0);
+    const [rol,setRol] = useState("");
+    const [estado, setEstado] = useState("")
+
+
+    const addUsuario = async ()=>{
+        const userData ={
+            nombre: nombre,
+            estado: estado,
+            telefono: telefono,
+            rol: rol
+        }
+console.log(userData);
+        const response = await fetch(`http://localhost:3001/manager-user`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+        const jsonResponse = await response.json();
+        console.log (jsonResponse);
+    }
+   
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
     const getInfo = async () => {
         try{
             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
@@ -30,7 +60,11 @@ const GestionUsers = () => {
         }catch(e){console.log(e);}
     }
 
+<<<<<<< HEAD
     const handleChange = (e)=>{
+=======
+/*     const handleChange = (e)=>{
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
         const name = e.target.name;
         const value = e.target.value;
         // console.log(e.target.name,e.target.value)
@@ -38,7 +72,11 @@ const GestionUsers = () => {
             ...prevState,
             [name]: value
         }))
+<<<<<<< HEAD
     }
+=======
+    } */
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
 
 
     /*     ESTA PARTE DE CÓDIGO ESTÁ EN EL MAESTRO PERO NO SÉ SI SE DEBE TENER EN EL FORMULARIO PARA MANDAR LA INFORMACIÓN AL MAESTRO */
@@ -72,7 +110,11 @@ const GestionUsers = () => {
         useEffect(() => {
             // getUsarios();
             getInfo();
+<<<<<<< HEAD
         },[name]);
+=======
+        },[name]);// eslint-disable-line react-hooks/exhaustive-deps
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
 
 
     return (
@@ -87,11 +129,30 @@ const GestionUsers = () => {
                     <div className="formulario">
 
                         <form id="form-gestion-usuarios" method="get" autoComplete="off">
+<<<<<<< HEAD
+=======
 
                             <p className="p-users">
-                                <label htmlFor="Nombre del usuario" className="labelGU">Nombre del usuario
+                                <label htmlFor="Nombre del usuario" className="labelGU">Nombre del usuario 
                                     <span className="obligatorio">*</span>
                                 </label>
+                                <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
+                                    placeholder="Ingrese nombre del usuario" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
+                            </p>
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
+
+                            <p className="p-users">
+                                <label htmlFor="Estado del usuario" className=" labelGU">Registre estado del usuario 
+                                    <span className="obligatorio">*</span>
+                                    <select value={estado} onChange={(e) => setEstado(e.target.value)} name="estado_de_usuario" required className="select">
+                                        <option disabled value>Selecciones una opción</option>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="autorizado">Autorizado</option>
+                                        <option value="no autorizado">No autorizado</option>
+
+                                    </select>
+                                </label>
+<<<<<<< HEAD
                                 <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
                                     placeholder="Ingrese nombre del usuario" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
                             </p>
@@ -124,16 +185,37 @@ const GestionUsers = () => {
                                 <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario
                                     <span className="obligatorio">*</span>
                                     <select value={usuario.rol} onChange={(e) => handleChange(e)} name="rol_de_usuario" required className="select"
+=======
+                            </p>
+                            <br />
+                            <br />
+                            <p className="p-users">
+                                <label htmlFor="Telefono del usuario" className="labelGU">Teléfono del usuario 
+                                    <span className="obligatorio">*</span>
+                                </label>
+                                <input type="number" name="introducir_telefono" id="nombre" required="obligatorio"
+                                    placeholder="Ingrese teléfono del usuario"
+                                    value={telefono} onChange={(e) => setTelefono(e.target.value)}
+                                />
+                            </p>
+                            <br />
+                            <p className="p-users">
+                                <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario 
+                                    <span className="obligatorio">*</span>
+                                    <select value={rol} onChange={(e) => setRol(e.target.value)} name="rol_de_usuario" required className="select"
+>>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
                                     >
-                                        <option disabled value>Seleccione una opción</option>
-                                        <option>Vendedor</option>
-                                        <option>Administrador</option>
+                                        {/* <option disabled value>Seleccione una opción</option> */}
+                                        <option value=""></option>
+                                        <option value="adminstrador">Administrador</option>
+                                        <option value="vendedor">Vendedor</option>
+                                       
                                     </select>
 
                                 </label>
                             </p>
 
-                            <button className="buttonMaestro" type="submit" name="enviar_formulario" id="enviar">
+                            <button className="buttonMaestro" type="button" onClick={addUsuario}  name="enviar_formulario" id="enviar">
                                 <p>Enviar</p>
                             </button>
 
