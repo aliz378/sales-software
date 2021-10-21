@@ -25,6 +25,14 @@ app.post("/add-user", async (req,res) =>{
     res.json(user);
     res.send("200");
 })
+
+app.post("/manager-user", async (req,res) =>{
+    const user = req.body;
+    await connection.execute(`INSERT INTO usuarios (nombre, id, telefono, email, rol, estado) VALUES ('${user.nombre}',54815 ,${user.telefono},'email','${user.rol}','${user.estado}')`);
+    res.json(user);
+    res.send("200");
+})
+
 app.put("/update-user", async(req,res) =>{
     const user = req.body;
     await connection.execute(`UPDATE usuarios SET nombre='${user.nombre}', telefono=${user.telefono}, rol='${user.rol}', estado='${user.estado}' WHERE email='${user.email}'`);
