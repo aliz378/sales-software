@@ -1,0 +1,29 @@
+{
+  "name": "sales-software",
+  "version": "1.0.0",
+  "description": "Grupo 14 misión tic\r ## Front-end\r Para inicializar el front-end en React js, se debe instalar las dependencias.\r ```sh\r npm install \r npm install @auth0/auth0-rect\r npm install bootstrap\r npm install --save reactstrap react react-dom\r ```\r Para subir el servidor en el puerto 3000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliz378/sales-software.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliz378/sales-software/issues"
+  },
+  "homepage": "https://github.com/aliz378/sales-software#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
