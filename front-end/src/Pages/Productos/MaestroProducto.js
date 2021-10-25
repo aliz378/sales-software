@@ -1,21 +1,119 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Navbar from '../../shared/components/navbar';
 import Sidebar from '../../shared/components/sidebar';
 //import icono from '../../assets/images/icons8-usuario-femenino-en-círculo-48 1.png'
+import { useAuth0 } from '@auth0/auth0-react'; // ANEXADO EL JUEVES 21 DE OCTUBRE, 2021
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap'; // ANEXADO EL JUEVES 21 DE OCTUBRE, 2021
 
 //import Aside from '../SharedComponents/aside/Aside'
 import './MaestroProducto.css';
 
-function MaestroProducto() {
-    let name = 'Admon2'
-    // Para agregar los elementos de la tabla de forma automattica
-    const numbers = [1,2,3,4,5];
-    const listItems = numbers.map((number) =>
-        <li>{number}</li>
+const MaestroProducto = () => {
+
+    //ANEXADO EL JUEVES 21 DE OCTUBRE: SE DEBE ADAPTAR AL MAEESTRO DE PRODUCTOS:
+    const { user } = useAuth0();
+    const [listProductos, setProductos] = useState([]);
+    const [name, setName] = useState("");
+    const [modalEditar, setModalEditar] = useState(false);
+    // const [permiso, setPermiso] = useState(false);
+    const [producto, setProducto] = useState({
+        idproductos: 0,
+        descripcion: '',
+        valorUnitario: 0,
+        estado: ''
+    });
+    const selectUser= (element,action) =>{
+        if(action === 'editar'){
+            producto.idproductos = element.idproductos;
+            setModalEditar(true);
+        }
+        if(action === 'eliminar')funcionEliminar(element);
+    }
+
+    const getInfo = async () => {
+        try{
+             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+             const jsonResponse = await response.json();
+             const userData = jsonResponse.data;
+             setName(userData.nombre);
+             //if(userData.rol === 'administrador') setPermiso(true);
+         }catch(e){console.log(e);}
+     }
+
+    const handleChange = (e)=>{
+        const name = e.target.name;
+        const value = e.target.value;
+        setProducto((prevState) =>({
+            ...prevState,
+            [name]: value
+        }))
+    } 
+    
+    //jo
+    
+    // ANEXADO EL JUEVES 21 DE OCTUBRE
+    const getProducts = async () => {
+        try {
+            const response = await fetch("http://localhost:3001/get-products");
+            const jsonResponse = await response.json();
+            const responseProducts = jsonResponse.data;
+            const listProductos = responseProducts.map((producto) =>
+                <tr>
+                    <th scope="row">{producto.id}</th>
+                    <td>{producto.nombre}</td>
+                    <td>{producto.estado}</td>
+                    <td>{producto.telefono}</td>
+                    <td>{producto.rol}</td>
+                    <td>
+                        <div className="btn-group" role="group" aria-label="Basic example">
+                <Button type="button" className="buttonMaestro" onClick= {() =>selectUser(producto,'editar')}>Editar</Button>
+                <button type="button" className=" buttonMaestro" onClick= {() => selectUser(producto,'eliminar')} > Eliminar</button>
+            </div></td>
+                </tr>
+            );
+            setProductos(listProductos);
+        }
+        catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    const funcionEditar = async()=>{
+        await fetch(`http://localhost:3001/update-products`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            idproductos: producto.idproductos,
+            descripcion: producto.descripcion,
+            valorUnitario: producto.valorUnitario,
+            estado: producto.estado
+        })});
+        setModalEditar(false);
+        getProducts();
+    }
+    const funcionEliminar = async(e)=>{
+        await fetch(`http://localhost:3001/delete-products`,{
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            idproductos:e.idproductos, 
+        })}).catch( error => {
+            console.error(`fetch operation failed: ${error.message}`);
+        });
+        getProducts();
+    }
+
+    useEffect(() => {
+        getProducts();
+        getInfo();
+    },[]);
+
+    // ANEXADO EL JUEVES 21 DE OCTUBRE
 
 
-    );
-    //
     return (
         <div className = 'MaestroProducto'>
             <Navbar username = {name}></Navbar>
@@ -42,7 +140,8 @@ function MaestroProducto() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                {listProductos}
+                {/* <tr>
                     <th scope="row">P0001</th>
                     <td>Calvin Klein</td>
                     <td>Disponible</td>
@@ -74,7 +173,7 @@ function MaestroProducto() {
                         <button type="button" className="buttonMaestro">Editar</button>
                         <button type="button" className=" buttonMaestro">Eliminar</button>
                     </div></td>
-                </tr>
+                </tr> */}
             </tbody>
         </table>
         </div> 

@@ -1,61 +1,126 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../shared/components/navbar'
 import Sidebar from '../../shared/components/sidebar'
 import './gestionUsersStyles.css'
-import {Link} from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import permission from '../../assets/images/permiso.jpg';
+
 // import gestion from '../../assets/images-gestion-users/gestion-usuarios.png';
 
-const gestionUsers = () => {
-    // const [rol, setRol] = useState("");
-    const name = 'Administrador 01'
+const GestionUsers = () => {
+    const { user } = useAuth0();
+    // const [listUsuarios, setUsuarios] = useState([]);
+    const [name, setName] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [telefono, setTelefono] = useState();
+    const [rol,setRol] = useState("");
+    const [estado, setEstado] = useState("")
+    const [permiso, setPermiso] = useState(false);
+   
+    const getInfo = async () => {
+        try{
+            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+            const jsonResponse = await response.json();
+            const userData = jsonResponse.data;
+            setName(userData.nombre);
+            if(userData.rol === 'administrador') setPermiso(true);
+        }catch(e){console.log(e);}
+    }
+
+/*     const handleChange = (e)=>{
+        const name = e.target.name;
+        const value = e.target.value;
+        // console.log(e.target.name,e.target.value)
+        setUsuario((prevState) =>({
+            ...prevState,
+            [name]: value
+        }))
+    } */
+
+
+    /*     ESTA PARTE DE CÓDIGO ESTÁ EN EL MAESTRO PERO NO SÉ SI SE DEBE TENER EN EL FORMULARIO PARA MANDAR LA INFORMACIÓN AL MAESTRO */
+    // let usuario = {_id:'', name_user:'',state_user:'', phone_user:'', role_user:''};
+        // const [listUsuarios, setUsuarios] = useState({
+        //     _id: usuario._id,
+        //     name: usuario.name_user,
+        //     state: usuario.state_user,
+        //     phone: usuario.phone_user,
+        //     state: usuario.role_user
+        //   });
+        
+        // const getUsuarios = async () => {
+        //     try {
+        //         const response = await fetch("http://localhost:3001/get-users");
+        //         const jsonResponse = await response.json();
+        //         const responseProducts = jsonResponse.data;
+        //         console.log(responseProducts)
+        //         const listUsuarios = responseProducts.map((usuario) =>
+        //         );
+        //         setUsuarios(listUsuarios)
+        //     }
+        //     catch (error) {
+        //         console.log(error)
+        //     }
+    
+        // }
+
+        //         }
+
+        useEffect(() => {
+            // getUsarios();
+            getInfo();
+        },[name]);
+
 
     return (
         <div className='profile'>
             <Navbar userName={name}></Navbar>
-            <Sidebar></Sidebar>
+            <Sidebar></Sidebar>        
+            { (permiso === true) ? 
+            <>
             <main className='user-container'>
-                <h2>Gestión de usuarios</h2>
-                {/* <img src={gestion} alt="Gestión de usuarios" id="img-registro-exitoso" /> */}
-                <div className="contact_formg">
+            <div className="container">
+            <div className="contact_forma">
                     <div className="formulario">
+
                         <form id="form-gestion-usuarios" method="get" autoComplete="off">
-                            {/* <p className="p-users">
-                                <label htmlFor="Cedula de usuario" className="labelGU">Cédula del usuario
-                                    <span className="obligatorio">*</span>
-                                </label>
-                                <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
-                                    placeholder="Ingrese cédula del usuario" />
-                            </p> */}
 
                             <p className="p-users">
-                                <label htmlFor="Nombre del usuario" className="labelGU">Nombre del usuario
+                                <label htmlFor="Nombre del usuario" className="labelGU">Nombre del usuario 
                                     <span className="obligatorio">*</span>
                                 </label>
                                 <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
-                                    placeholder="Ingrese nombre del usuario" />
+                                    placeholder="Ingrese nombre del usuario" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
                             </p>
 
-                            <label className=" labelGU">Registre estado del usuario
-                                <span className="obligatorio">*</span>
-                            </label>
-                            <br />
-                            <br />
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                                <label className="form-check-label" htmlFor="inlineCheckbox1">Pendiente</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                                <label className="form-check-label" htmlFor="inlineCheckbox2">Autorizado</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
-                                <label className="form-check-label" htmlFor="inlineCheckbox3">No autorizado</label>
-                            </div>
-                              {/* <p className="p-users">
-                                <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario
+                            <p className="p-users">
+                                <label htmlFor="Estado del usuario" className=" labelGU">Registre estado del usuario 
                                     <span className="obligatorio">*</span>
-                                    <select value={rol} onChange={(e) => { setRol(e.target.value); }} name="rol_de_usuario" required
+                                    <select value={estado} onChange={(e) => setEstado(e.target.value)} name="estado_de_usuario" required className="select">
+                                        <option disabled value>Selecciones una opción</option>
+                                        <option value="no">Pendiente</option>
+                                        <option value="yes">Autorizado</option>
+                                        <option value="no">No autorizado</option>
+
+                                    </select>
+                                </label>
+                            </p>
+                            <br />
+                            <br />
+                            <p className="p-users">
+                                <label htmlFor="Telefono del usuario" className="labelGU">Teléfono del usuario 
+                                    <span className="obligatorio">*</span>
+                                </label>
+                                <input type="text" name="introducir_telefono" id="nombre" required="obligatorio"
+                                    placeholder="Ingrese teléfono del usuario"
+                                    value={telefono} onChange={(e) => setTelefono(e.target.value)}
+                                />
+                            </p>
+                            <br />
+                            <p className="p-users">
+                                <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario 
+                                    <span className="obligatorio">*</span>
+                                    <select value={rol} onChange={(e) => setRol(e.target.value)} name="rol_de_usuario" required className="select"
                                     >
                                         <option disabled value>Seleccione una opción</option>
                                         <option>Vendedor</option>
@@ -67,33 +132,31 @@ const gestionUsers = () => {
 
                             <button className="buttonMaestro" type="submit" name="enviar_formulario" id="enviar">
                                 <p>Enviar</p>
-                            </button> */}
+                            </button>
 
                             <br />
                             <br />
                             <p className="aviso">
                                 <span className="obligatorio"> * </span>los campos son obligatorios.
-                                <br />
-                                <br />
-
-                                <Link to='/exitoRegUsers'>
-                                <button className="buttonMaestro" type="submit" name="enviar_formulario" id="enviar"><p>Enviar</p></button>
-                                </Link>  
-                                <br />
-                                <br />
-                                <p className="aviso">
-                                <span className="obligatorio"> * </span>los campos son obligatorios.
-                                </p>
                             </p>
                         </form>
                     </div>
                 </div>
-            </main >
-        </div >
+            </div>
+            </main>
+            </>
+            :
+            <>
+            <main className='maestro-container'>
+                <img src={permission} alt="Do not have permission" />
+                <h2 id = "registroProductoP" >No tienes permiso en esta sección</h2>
+            </main>
+            </>}
+        </div> 
     )
-}
+};
 
-export default gestionUsers
+export default GestionUsers
 
 
             

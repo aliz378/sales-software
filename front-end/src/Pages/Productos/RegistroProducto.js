@@ -1,13 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Navbar from '../../shared/components/navbar';
 import Sidebar from '../../shared/components/sidebar';
+import { useAuth0 } from '@auth0/auth0-react';
+import permission from '../../assets/images/permiso.jpg';
 // import icono from '../../assets/images/icons8-usuario-femenino-en-círculo-48 1.png'
 
 //import Aside from '../SharedComponents/aside/Aside'
 import './RegistroProducto.css';
 
-function RegistroProducto() {
-    let name = 'Administrador 01'
+const RegistroProducto = () => {
+    //let name = 'Administrador 01'
+
+    const { user } = useAuth0();
+    // const [listUsuarios, setUsuarios] = useState([]);
+    const [name, setName] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [telefono, setTelefono] = useState();
+    const [rol,setRol] = useState("");
+    const [estado, setEstado] = useState("")
+    const [permiso, setPermiso] = useState(false);
+   
+    const getInfo = async () => {
+        try{
+            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+            const jsonResponse = await response.json();
+            const userData = jsonResponse.data;
+            setName(userData.nombre);
+            if(userData.rol === 'administrador') setPermiso(true);
+        }catch(e){console.log(e);}
+    }
+
+    useEffect(() => {
+      // getUsarios();
+      getInfo();
+  },[name]);
+
+
+
     return (
         <div className = 'RegistroProducto'>
             <Navbar username = {name}></Navbar>

@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const domain =  'dev-h39--0tx.us.auth0.com';
-
-const clientId = 'NpZnSND7bRw61RFpwQPNrfom1ER4B8Ds';
+const clientId =  'NpZnSND7bRw61RFpwQPNrfom1ER4B8Ds';
 
 ReactDOM.render(
   <Auth0Provider
