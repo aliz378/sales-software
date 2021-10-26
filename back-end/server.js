@@ -103,10 +103,11 @@ app.delete("/delete-products", (req,res) =>{
 })
 app.listen(app get('port'), async () =>{
     connection = await mysql.createConnection({
-        host : 'localhost', //Se cambio el nombre del host por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
-        user : 'root', //Se cambio el nombre del user por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
-        password: 'Shingeky_2021',  //Se cambio el nombre del PASSWORD por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
-        database: 'perfumeria',  //Se cambio el nombre de la database por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
+
+        host : 'localhost',
+        user : 'root',
+        password: 'root',
+        database: 'perfumeria',
         Promise: bluebird
     });
     console.log("Server runing on port: " + port); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103

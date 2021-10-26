@@ -130,6 +130,8 @@ console.log(userData);
                             <br />
                             <p className="p-users">
                                 <label htmlFor="Telefono del usuario" className="labelGU">Teléfono del usuario 
+
+
                                     <span className="obligatorio">*</span>
                                 </label>
                                 <input type="number" name="introducir_telefono" id="nombre" required="obligatorio"
@@ -141,6 +143,7 @@ console.log(userData);
                             <p className="p-users">
                                 <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario 
                                     <span className="obligatorio">*</span>
+
                                     <select value={rol} onChange={(e) => setRol(e.target.value)} name="rol_de_usuario" required className="select"
                                     >
                                         {/* <option disabled value>Seleccione una opción</option> */}
@@ -179,7 +182,5 @@ console.log(userData);
     )
 };
 
+
 export default GestionUsers
-
-
-            
