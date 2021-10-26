@@ -11,9 +11,9 @@ let connection;
 app.use(express.json());
 app.use(cors({origin: true}));
 
-app.set('port', process.env.PORT || port) //Agregad el domingo 24 de octubre de 2021_ ULTIMA SEMANA MINTIC -ciclo 03
-app.get("/", (req, res) =>{ //Agregad el domingo 24 de octubre de 2021_ ULTIMA SEMANA MINTIC -ciclo 03
-    res.json("Backend misiontic shop"); }) //Este nombre se debe ajustar5 después: no es el correcto.
+//app.set('port', process.env.PORT || port) //Agregad el domingo 24 de octubre de 2021_ ULTIMA SEMANA MINTIC -ciclo 03
+//app.get("/", (req, res) =>{ //Agregad el domingo 24 de octubre de 2021_ ULTIMA SEMANA MINTIC -ciclo 03
+    //res.json("Backend misiontic shop"); }) //Este nombre se debe ajustar5 después: no es el correcto.
 //Usuarios
 app.get("/auth", async (req,res) =>{
     const email = req.query.email;
@@ -94,13 +94,13 @@ app.delete("/delete-products", (req,res) =>{
     res.json(user);
 })
 app.listen(app get('port'), async () =>{
-    // connection = await mysql.createConnection({
-    //     host : 'localhost',
-    //     user : 'root',
-    //     password: 'Shingeky_2021',
-    //     database: 'perfumeria',
-    //     Promise: bluebird
-    // });
-    console.log("Server runing on port: " + app.get('port')); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
+    connection = await mysql.createConnection({
+        host : 'localhost', //Se cambio el nombre del host por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
+        user : 'root', //Se cambio el nombre del user por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
+        password: 'Shingeky_2021',  //Se cambio el nombre del PASSWORD por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
+        database: 'perfumeria',  //Se cambio el nombre de la database por el de freesqldatabase.com: MODIFICADO lunes 25 de octubre
+        Promise: bluebird
+    });
+    console.log("Server runing on port: " + port); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
 });
 
