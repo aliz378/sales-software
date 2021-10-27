@@ -4,6 +4,7 @@ import Sidebar from '../../shared/components/sidebar';
 import perfil from '../../assets/images/perfiles.jpg';
 import { useAuth0 } from '@auth0/auth0-react';
 import './mainStyles.css'
+import apiBaseUrl from '../../shared/utils/api';
 
 const MainPage = () => {
     let userData;
@@ -16,8 +17,11 @@ const MainPage = () => {
     const { user } = useAuth0();
 
     const getUser = async () => {
+        // let idGoogle = user.sub;
+        // idGoogle = idGoogle.slice(14);
+        // console.log(idGoogle.slice(14));
         try {
-            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+            const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
             const jsonResponse = await response.json();
             userData = jsonResponse.data;
             setName(userData.nombre);

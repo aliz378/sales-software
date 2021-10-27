@@ -5,6 +5,7 @@ import permission from '../../assets/images/permiso.jpg';
 import { useAuth0 } from '@auth0/auth0-react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import './maestroUsersStyles.css';
+import apiBaseUrl from '../../shared/utils/api';
 
 const MaestroUsers = () => {
     const { user } = useAuth0();
@@ -29,7 +30,7 @@ const MaestroUsers = () => {
 
     const getInfo = async () => {
         try{
-            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+            const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
             const jsonResponse = await response.json();
             const userData = jsonResponse.data;
             setName(userData.nombre);
@@ -45,7 +46,7 @@ const MaestroUsers = () => {
         }))
     } 
     const funcionEditar = async()=>{
-        await fetch(`http://localhost:3001/update-user`,{
+        await fetch(`${apiBaseUrl}/update-user`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -59,7 +60,7 @@ const MaestroUsers = () => {
         getUsarios();
     }
     const funcionEliminar = async(e)=>{
-        await fetch(`http://localhost:3001/delete-user`,{
+        await fetch(`${apiBaseUrl}/delete-user`,{
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
@@ -74,7 +75,7 @@ const MaestroUsers = () => {
     
     const getUsarios = async () => {
         try {
-            const response = await fetch("http://localhost:3001/get-users");
+            const response = await fetch(`${apiBaseUrl}/get-users`);
             const jsonResponse = await response.json();
             const responseProducts = jsonResponse.data;
             const listUsuario = responseProducts.map((usuario) =>

@@ -1,5 +1,6 @@
 import React {useState} from 'react'
 import Navbar from '../../shared/components/navbar'
+import { useAuth0 } from '@auth0/auth0-react';
 import Sidebar from '../../shared/components/sidebar'
 import { useState } from 'react'
 
