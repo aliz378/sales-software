@@ -6,6 +6,8 @@ const port = 3001;
 const bluebird = require('bluebird');
 let connection;
 
+//Configura el servidor para redcibir datos en formato json
+
 app.use(express.json());
 app.use(cors({origin: true}));
 
@@ -82,11 +84,13 @@ app.delete("/delete-products", async(req,res) =>{
 
 app.listen(port, async () =>{
     connection = await mysql.createConnection({
+
         host : 'localhost',
         user : 'root',
         password: 'mintic',
         database: 'perfumeria',
         Promise: bluebird
     });
-    console.log("Server runing on port: " + port);
+    console.log("Server runing on port: " + port); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
 });
+

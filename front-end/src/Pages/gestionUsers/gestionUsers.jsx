@@ -93,6 +93,8 @@ const GestionUsers = () => {
                             <br />
                             <p className="p-users">
                                 <label htmlFor="Telefono del usuario" className="labelGU">Teléfono del usuario 
+
+
                                     <span className="obligatorio">*</span>
                                 </label>
                                 <input type="number" name="introducir_telefono" id="nombre" required="obligatorio"
@@ -139,5 +141,6 @@ const GestionUsers = () => {
         </div> 
     )
 };
+
 
 export default GestionUsers

@@ -25,6 +25,7 @@ const MaestroProducto = () => {
             setModalEditarP(true);
         }
         if(action === 'eliminar')eliminar(element);
+
     }
 
     const getInfo = async () => {
@@ -36,6 +37,7 @@ const MaestroProducto = () => {
              //if(userData.rol === 'administrador') setPermiso(true);
          }catch(e){console.log(e);}
     }
+
 
     const handleChange = (e)=>{
         const name = e.target.name;
@@ -75,6 +77,7 @@ const MaestroProducto = () => {
 
     }
 
+
     const editar = async()=>{
         await fetch(`http://localhost:3001/update-products`,{
         method: 'PUT',
@@ -106,7 +109,6 @@ const MaestroProducto = () => {
         getProducts();
         getInfo();
     },[name]);// eslint-disable-line react-hooks/exhaustive-deps
-
 
     return (
         <div className = 'MaestroProducto'>
