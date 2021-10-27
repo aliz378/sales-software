@@ -96,4 +96,3 @@ app.listen(app.get('port'), async () =>{
     //PASO 3 (Incluir app.get...)
     console.log("Server running on port: " + app.get('port')); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
 });
-
