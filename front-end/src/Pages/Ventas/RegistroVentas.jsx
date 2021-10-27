@@ -1,84 +1,125 @@
-import React {useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../shared/components/navbar'
 import { useAuth0 } from '@auth0/auth0-react';
 import Sidebar from '../../shared/components/sidebar'
-import { useState } from 'react'
+import './RegistoVenta.css';
+import apiBaseUrl from '../../shared/utils/api';
 
 
 const RegistroVentas = () => {
-    const name = 'Administrador 01'
-    const [idCliente, setIdCliente] = useState (0);
-    const [nombreCliente, setNombreCliente] = useState ("");
-    const addIdCLiente = async () => {
-        const response = await fetch(http://localhost:3001/add-venta)
+  const { user } = useAuth0();
+  const [name, setName] = useState("");
+  
+//   const [id, setId] = useState("");
+  const [date, setDate] = useState("");
+  const [total,setTotal] = useState(0);
+  const [idProducto,setIdProducto] = useState(0);
+  const [client,setClient] = useState("");
+  const [idClient,setIdClient] = useState(0);
+  const [salesManage,setSalesManager] = useState("");
+
+  const getInfo = async () => {
+    try{
+      const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
+      const jsonResponse = await response.json();
+      const userData = jsonResponse.data;
+      setName(userData.nombre);
+      //if(userData.rol === 'administrador') setPermiso(true);
+    }catch(e){console.log(e);}
+  }
+
+  const addSale = async ()=>{
+    const userData ={
+        // id:,
+        fecha: date,
+        total: total,
+        idProducto: idProducto,
+        cliente: client,
+        idCliente: idClient,
+        encargado: salesManage
     }
-    return (
-        <div className='profile'>
-            <Navbar userName={name}></Navbar>
-            <Sidebar></Sidebar>
-            <main className='maestro-container'>
-                <div>
-                    <h2>Registro de Ventas</h2>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="user" value="Adminitrador01"/>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">ID Cliente</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="IdCliente" placeholder="Número identificación Cliente" onChange ={ (e) => setIdCliente(e.target.value)}/>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Nombre del cliente</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="Nombre_CLiente" placeholder="Nombre o Razón Social Cliente"/>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Seleccione Producto</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Seleccione Producto"/>
-                        <datalist id="datalistOptions">
-                            <option value="Calvin Klein"/>
-                            <option value="Nautica"/>
-                            <option value="Paco Rabanne"/>
-                        </datalist>
-                        {/* <FontAwesomeIcon icon="fa-solid fa-plus" /> */}
-                    </div>
-                
-                </div>
-                <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Cantidad </th>
-      <th scope="col">Valor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Calvin Klein</td>
-      <td>1</td>
-      <td>$700.000</td>
-    </tr>
-    <tr>
-      <th scope="row">VALOR TOTAL</th>
-      <td></td>
-      <td></td>
-      <td>$700.000</td>
-    </tr>
-  </tbody>
-</table>
-                <button type="submit" name="crear_venta" id="send"><p>Crear Venta</p></button>    
-            </main>
-        </div>
-    )
+    const response = await fetch(`${apiBaseUrl}/add-sale`, {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    });
+    const jsonResponse = await response.json();
+    console.log (jsonResponse);
+  }
+
+useEffect(() => {
+  getInfo();
+},[name]);// eslint-disable-line react-hooks/exhaustive-deps
+  return (
+    <div className='profile'>
+    <Navbar userName={name}></Navbar>
+    <Sidebar></Sidebar>
+    <main className='maestro-container'>
+    <div className="container">
+    <div className="contact_forma">
+      <div className="formulario">
+        <form id="form-gestion-usuarios" method="get" autoComplete="off">
+
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Fecha
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="date" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={date} onChange={(e) => setDate(e.target.value)}/>
+          </p>
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Total
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="number" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={total} onChange={(e) => setTotal(e.target.value)}/>
+          </p>
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Id Producto
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="number" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={idProducto} onChange={(e) => setIdProducto(e.target.value)}/>
+          </p>
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Cliente
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={client} onChange={(e) => setClient(e.target.value)}/>
+          </p>
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Id Cliente
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="number" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={idClient} onChange={(e) => setIdClient(e.target.value)}/>
+          </p>
+          <p>
+            <label htmlFor="Nombre del usuario" className="colocar_nombre">Encargado
+              <span className="obligatorio">*</span>
+            </label>
+              <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" 
+              placeholder="Ingrese una descripción del producto" value={salesManage} onChange={(e) => setSalesManager(e.target.value)}/>
+          </p>
+          
+          <button className="buttonMaestro" type="button" onClick={addSale}  name="enviar_formulario" id="enviar">
+              <p>Enviar</p>
+          </button>
+          <br />
+          <br />
+          <p className="aviso">
+              <span className="obligatorio"> * </span>los campos son obligatorios.
+          </p>
+      </form>
+    </div>
+    </div>
+    </div>
+    </main>
+    </div>
+  )
 }
 
 export default RegistroVentas
