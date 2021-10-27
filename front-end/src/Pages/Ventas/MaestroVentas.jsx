@@ -4,6 +4,7 @@ import Sidebar from '../../shared/components/sidebar'
 import { useAuth0 } from '@auth0/auth0-react'; 
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap'; 
 import './MaestroVentas.css';
+import apiBaseUrl from '../../shared/utils/api';
 
 const MaestroVentas = () => {
     const { user } = useAuth0();
@@ -30,7 +31,7 @@ const MaestroVentas = () => {
 
     const getInfo = async () => {
         try{
-             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+             const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
              const jsonResponse = await response.json();
              const userData = jsonResponse.data;
              setName(userData.nombre);
@@ -48,7 +49,7 @@ const MaestroVentas = () => {
     } 
     const getSale = async () => {
         try {
-            const response = await fetch("http://localhost:3001/get-sales");
+            const response = await fetch(`${apiBaseUrl}/get-sales`);
             const jsonResponse = await response.json();
             const responseProducts = jsonResponse.data;
             const listSales = responseProducts.map((sale) =>
@@ -75,7 +76,7 @@ const MaestroVentas = () => {
 
     }
     const funcionEditarV = async()=>{
-        await fetch(`http://localhost:3001/update-sale`,{
+        await fetch(`${apiBaseUrl}/update-sale`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -91,7 +92,7 @@ const MaestroVentas = () => {
         getSale();
     }
     const funcionEliminarV = async(e)=>{
-        await fetch(`http://localhost:3001/delete-sale`,{
+        await fetch(`${apiBaseUrl}/delete-sale`,{
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',

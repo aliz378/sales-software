@@ -4,6 +4,7 @@ import Sidebar from '../../shared/components/sidebar'
 import './gestionUsersStyles.css'
 import { useAuth0 } from '@auth0/auth0-react';
 import permission from '../../assets/images/permiso.jpg';
+import apiBaseUrl from '../../shared/utils/api';
 
 // import gestion from '../../assets/images-gestion-users/gestion-usuarios.png';
 
@@ -29,7 +30,7 @@ const GestionUsers = () => {
             rol: rol
         }
 
-        const response = await fetch(`http://localhost:3001/add-user`, {
+        const response = await fetch(`${apiBaseUrl}/add-user`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'

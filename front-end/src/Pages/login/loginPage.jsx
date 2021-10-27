@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'; // <<--- HOOKS
 import './loginStyles.css';
 import { Redirect } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import apiBaseUrl from '../../shared/utils/api';
 
 
 function LoginPage() {
@@ -11,7 +12,7 @@ function LoginPage() {
 
     const validateUserRole = async() => {
         try{
-            const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+            const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
             const jsonResponse = await response.json();
             // console.log(user);
             return jsonResponse.data;
@@ -24,7 +25,7 @@ function LoginPage() {
     const addUser = async() => {
         let idGoogle = user.sub;
         idGoogle = parseInt(idGoogle.slice(14));
-        const response = await fetch('http://localhost:3001/add-user',{
+        const response = await fetch(`${apiBaseUrl}/add-user`,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',

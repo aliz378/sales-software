@@ -10,6 +10,8 @@ let connection;
 
 app.use(express.json());
 app.use(cors({origin: true}));
+//PASO 1
+app.set('port', process.env.PORT || port)
 
 //Usuarios
 app.get("/auth", async (req,res) =>{
@@ -81,16 +83,17 @@ app.delete("/delete-products", async(req,res) =>{
     await connection.execute(`DELETE FROM productos WHERE idproductos = '${producto.idproductos}'`).catch((e)=>console.log(e));
     res.json(producto);
 })
-
-app.listen(port, async () =>{
+//PASO 2 (cambiar app.listen y cambiar datos de la bd)
+app.listen(app.get('port'), async () =>{
     connection = await mysql.createConnection({
-
-        host : 'localhost',
-        user : 'root',
-        password: 'mintic',
-        database: 'perfumeria',
+        host: 'sql10.freesqldatabase.com',
+        user: 'sql10446929',
+        password: 'mCtDsAIdLf',
+        database: 'sql10446929',
+        port: 3306,
         Promise: bluebird
     });
-    console.log("Server runing on port: " + port); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
+    //PASO 3 (Incluir app.get...)
+    console.log("Server running on port: " + app.get('port')); //Modificad hoy domingo 24 de octubre. Se comentaron las líneas 97 - 103
 });
 

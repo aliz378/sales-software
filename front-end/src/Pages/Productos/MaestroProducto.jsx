@@ -4,6 +4,7 @@ import Sidebar from '../../shared/components/sidebar';
 import { useAuth0 } from '@auth0/auth0-react'; 
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap'; 
 import './MaestroProducto.css';
+import apiBaseUrl from '../../shared/utils/api';
 
 const MaestroProducto = () => {
 
@@ -30,7 +31,7 @@ const MaestroProducto = () => {
 
     const getInfo = async () => {
         try{
-             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+             const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
              const jsonResponse = await response.json();
              const userData = jsonResponse.data;
              setName(userData.nombre);
@@ -53,7 +54,7 @@ const MaestroProducto = () => {
     // ANEXADO EL JUEVES 21 DE OCTUBRE
     const getProducts = async () => {
         try {
-            const response = await fetch("http://localhost:3001/get-products");
+            const response = await fetch(`${apiBaseUrl}/get-products`);
             const jsonResponse = await response.json();
             const responseProducts = jsonResponse.data;
             const listProductos = responseProducts.map((producto) =>
@@ -79,7 +80,7 @@ const MaestroProducto = () => {
 
 
     const editar = async()=>{
-        await fetch(`http://localhost:3001/update-products`,{
+        await fetch(`${apiBaseUrl}/update-products`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -92,7 +93,7 @@ const MaestroProducto = () => {
         getProducts();
     }
     const eliminar = async(e)=>{
-        await fetch(`http://localhost:3001/delete-products`,{
+        await fetch(`${apiBaseUrl}/delete-products`,{
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',

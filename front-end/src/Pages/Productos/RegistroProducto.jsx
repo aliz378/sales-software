@@ -3,6 +3,7 @@ import Navbar from '../../shared/components/navbar';
 import { useAuth0 } from '@auth0/auth0-react';
 import Sidebar from '../../shared/components/sidebar';
 import './RegistroProducto.css';
+import apiBaseUrl from '../../shared/utils/api';
 
 function RegistroProducto() {
   const { user } = useAuth0();
@@ -15,7 +16,7 @@ function RegistroProducto() {
 
   const getInfo = async () => {
     try{
-         const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+         const response = await fetch(`${apiBaseUrl}/auth?email=${user.email}`);
          const jsonResponse = await response.json();
          const userData = jsonResponse.data;
          setName(userData.nombre);
@@ -31,7 +32,7 @@ function RegistroProducto() {
         estado: estado
     }
 
-    const response = await fetch(`http://localhost:3001/add-product`, {
+    const response = await fetch(`${apiBaseUrl}/add-product`, {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
