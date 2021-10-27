@@ -16,6 +16,9 @@ const MainPage = () => {
     const { user } = useAuth0();
 
     const getUser = async () => {
+        // let idGoogle = user.sub;
+        // idGoogle = idGoogle.slice(14);
+        // console.log(idGoogle.slice(14));
         try {
             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
             const jsonResponse = await response.json();

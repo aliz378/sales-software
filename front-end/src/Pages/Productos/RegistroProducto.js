@@ -1,73 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../shared/components/navbar';
+import { useAuth0 } from '@auth0/auth0-react';
 import Sidebar from '../../shared/components/sidebar';
-// import icono from '../../assets/images/icons8-usuario-femenino-en-círculo-48 1.png'
-
-//import Aside from '../SharedComponents/aside/Aside'
 import './RegistroProducto.css';
 
 function RegistroProducto() {
-    let name = 'Administrador 01'
+  const { user } = useAuth0();
+  const [name, setName] = useState("");
+  
+  // const [idProdructo,setIdProdructo] = useState(0);
+  const [descripcion, setDescripcion] = useState("");
+  const [estado, setEstado] = useState("");
+  const [valorUnitario,setValorUnitario] = useState(0);
+
+  const getInfo = async () => {
+    try{
+         const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
+         const jsonResponse = await response.json();
+         const userData = jsonResponse.data;
+         setName(userData.nombre);
+         //if(userData.rol === 'administrador') setPermiso(true);
+     }catch(e){console.log(e);}
+  }
+
+  const addProduct = async ()=>{
+    const userData ={
+        // idProdructo: idProdructo,
+        descripcion: descripcion,
+        valorUnitario: valorUnitario,
+        estado: estado
+    }
+
+    const response = await fetch(`http://localhost:3001/add-product`, {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    });
+    const jsonResponse = await response.json();
+    console.log (jsonResponse);
+}
+
+useEffect(() => {
+  getInfo();
+},[name]);// eslint-disable-line react-hooks/exhaustive-deps
     return (
         <div className = 'RegistroProducto'>
             <Navbar username = {name}></Navbar>
             <Sidebar></Sidebar>
-            <div className = "registro" >
-            {/* <div className = "col-8 columna-derecha"> */}
-            
-            <div className="container campo-datosa">
-              <div>
-                <h2 id = "registroProductoP" >Registro De Producto</h2>
-                
-              </div>
-              </div>
-
-              <div className="contact_formr"> 
-                <div className="formulario">
-                <form id="form-gestion-usuarios" method="get" autocomplete="off"> 
+            <main className='user-container'>
+            <div className="container">
+            <div className="contact_forma">
+              <div className="formulario">
+                <form id="form-gestion-usuarios" method="get" autoComplete="off">
                   <p>
-                    <label htmlFor="Identificador de usuario" className="colocar_nombre">Identificador de producto:
+                    <label htmlFor="Nombre del usuario" className="colocar_nombre">Descripción
                       <span className="obligatorio">*</span>
                     </label>
-                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese id de Producto"/>
+                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" 
+                      placeholder="Ingrese una descripción del producto" value={descripcion} onChange={(e) => setDescripcion(e.target.value)}/>
                   </p>
-                <p>
-                    <label for="Nombre del usuario" className="colocar_nombre">Descripción
+                  <p>
+                    <label htmlFor="Identificador de usuario" className="colocar_nombre">Valor Unitario(COP)
                       <span className="obligatorio">*</span>
                     </label>
-                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese una descripción del producto"/>
+                      <input type="number" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese el valor del producto por unidad"
+                      value={valorUnitario} onChange={(e) => setValorUnitario(e.target.value)}/>
+                  </p>   
+                  <p>
+                    <label htmlFor="Rol de usuario" className="colocar_mensaje">Estado
+                      <span className="obligatorio">*</span>
+                    </label>                     
+                    <select name="rol" value={estado} onChange={(e) => setEstado(e.target.value)} required className="select">
+                            <option disabled value>Selecciones una opción</option>
+                            <option value=""></option>
+                            <option value="disponible">Disponible</option>
+                            <option value="agotado">Agotado</option>
+
+                    </select>
                   </p>
-                 
-
-                    <p>
-                      <label for="Rol de usuario" className="colocar_mensaje">Estado
-                        <span className="obligatorio">*</span>
-                      </label>                     
-                      <select name="rol" required>
-                          <option value="">Seleccione un rol</option>                
-                          <option>Disponible</option>                
-                          <option>Agotado </option>                
-                          
-                        </select>   
-
-                    </p>         
-                    <p>
-                    <label for="Identificador de usuario" className="colocar_nombre">Valor Unitario(COP)
-                      <span className="obligatorio">*</span>
-                    </label>
-                      <input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Ingrese el valor del producto por unidad"/>
-                  </p>         
-                 
-                    <button type="submit" name="enviar_formulario" id="enviar"><p>Enviar</p></button>
-                     <p className="aviso">
+                  <button className="buttonMaestro" type="button" onClick={addProduct}  name="enviar_formulario" id="enviar">
+                      <p>Enviar</p>
+                  </button>
+                  <br />
+                  <br />
+                  <p className="aviso">
                       <span className="obligatorio"> * </span>los campos son obligatorios.
-                    </p>                 
-                    </form>
-                  </div>
-                </div>
-            </div>
-        </div>  
-        // </div>
+                  </p>
+              </form>
+          </div>
+          </div>
+          </div>
+       </main> 
+      </div>       
     );
 }
 

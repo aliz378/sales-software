@@ -11,17 +11,6 @@ const GestionUsers = () => {
     const { user } = useAuth0();
     // const [listUsuarios, setUsuarios] = useState([]);
     const [name, setName] = useState("");
-<<<<<<< HEAD
-    const [nombre, setNombre] = useState("");
-    const [permiso, setPermiso] = useState(false);
-    const [usuario, setUsuario] = useState({
-        nombre:'',
-        email:'',
-        telefono:0,           
-        rol:'',
-        estado:''
-    });
-=======
     const [permiso, setPermiso] = useState(false);
     
     const [nombre, setNombre] = useState("");
@@ -32,13 +21,15 @@ const GestionUsers = () => {
 
     const addUsuario = async ()=>{
         const userData ={
+            id:null,
+            email:null,
             nombre: nombre,
             estado: estado,
             telefono: telefono,
             rol: rol
         }
-console.log(userData);
-        const response = await fetch(`http://localhost:3001/manager-user`, {
+
+        const response = await fetch(`http://localhost:3001/add-user`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -49,7 +40,6 @@ console.log(userData);
         console.log (jsonResponse);
     }
    
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
     const getInfo = async () => {
         try{
             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
@@ -60,61 +50,10 @@ console.log(userData);
         }catch(e){console.log(e);}
     }
 
-<<<<<<< HEAD
-    const handleChange = (e)=>{
-=======
-/*     const handleChange = (e)=>{
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
-        const name = e.target.name;
-        const value = e.target.value;
-        // console.log(e.target.name,e.target.value)
-        setUsuario((prevState) =>({
-            ...prevState,
-            [name]: value
-        }))
-<<<<<<< HEAD
-    }
-=======
-    } */
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
+    useEffect(() => {
+        getInfo();
+    },[name]);// eslint-disable-line react-hooks/exhaustive-deps
 
-
-    /*     ESTA PARTE DE CÓDIGO ESTÁ EN EL MAESTRO PERO NO SÉ SI SE DEBE TENER EN EL FORMULARIO PARA MANDAR LA INFORMACIÓN AL MAESTRO */
-    // let usuario = {_id:'', name_user:'',state_user:'', phone_user:'', role_user:''};
-        // const [listUsuarios, setUsuarios] = useState({
-        //     _id: usuario._id,
-        //     name: usuario.name_user,
-        //     state: usuario.state_user,
-        //     phone: usuario.phone_user,
-        //     state: usuario.role_user
-        //   });
-        
-        // const getUsuarios = async () => {
-        //     try {
-        //         const response = await fetch("http://localhost:3001/get-users");
-        //         const jsonResponse = await response.json();
-        //         const responseProducts = jsonResponse.data;
-        //         console.log(responseProducts)
-        //         const listUsuarios = responseProducts.map((usuario) =>
-        //         );
-        //         setUsuarios(listUsuarios)
-        //     }
-        //     catch (error) {
-        //         console.log(error)
-        //     }
-    
-        // }
-
-        //         }
-
-        useEffect(() => {
-            // getUsarios();
-            getInfo();
-<<<<<<< HEAD
-        },[name]);
-=======
-        },[name]);// eslint-disable-line react-hooks/exhaustive-deps
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
 
 
     return (
@@ -129,8 +68,6 @@ console.log(userData);
                     <div className="formulario">
 
                         <form id="form-gestion-usuarios" method="get" autoComplete="off">
-<<<<<<< HEAD
-=======
 
                             <p className="p-users">
                                 <label htmlFor="Nombre del usuario" className="labelGU">Nombre del usuario 
@@ -139,7 +76,6 @@ console.log(userData);
                                 <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
                                     placeholder="Ingrese nombre del usuario" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
                             </p>
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
 
                             <p className="p-users">
                                 <label htmlFor="Estado del usuario" className=" labelGU">Registre estado del usuario 
@@ -152,40 +88,6 @@ console.log(userData);
 
                                     </select>
                                 </label>
-<<<<<<< HEAD
-                                <input type="text" name="introducir_nombre" id="nombre" required="obligatorio"
-                                    placeholder="Ingrese nombre del usuario" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-                            </p>
-
-                            <p className="p-users">
-                                <label htmlFor="Estado del usuario" className=" labelGU">Registre estado del usuario
-                                    <span className="obligatorio">*</span>
-                                    <select value={usuario.estado} onChange={(e) => handleChange(e)} name="estado_de_usuario" required className="select">
-                                        <option disabled value>Selecciones una opción</option>
-                                        <option value="no">Pendiente</option>
-                                        <option value="yes">Autorizado</option>
-                                        <option value="no">No autorizado</option>
-
-                                    </select>
-                                </label>
-                            </p>
-                            <br />
-                            <br />
-                            <p className="p-users">
-                                <label htmlFor="Telefono del usuario" className="labelGU">Teléfono del usuario
-                                    <span className="obligatorio">*</span>
-                                </label>
-                                <input type="text" name="introducir_telefono" id="nombre" required="obligatorio"
-                                    placeholder="Ingrese teléfono del usuario"
-                                    value={usuario.telefono} onChange={(e) => handleChange(e)}
-                                />
-                            </p>
-                            <br />
-                            <p className="p-users">
-                                <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario
-                                    <span className="obligatorio">*</span>
-                                    <select value={usuario.rol} onChange={(e) => handleChange(e)} name="rol_de_usuario" required className="select"
-=======
                             </p>
                             <br />
                             <br />
@@ -202,10 +104,7 @@ console.log(userData);
                             <p className="p-users">
                                 <label htmlFor="Rol del usuario" className=" labelGU">Asigne un rol al usuario 
                                     <span className="obligatorio">*</span>
-                                    <select value={rol} onChange={(e) => setRol(e.target.value)} name="rol_de_usuario" required className="select"
->>>>>>> 5b48f4e635532972ae54ec447127c2a0a44e51ef
-                                    >
-                                        {/* <option disabled value>Seleccione una opción</option> */}
+                                    <select value={rol} onChange={(e) => setRol(e.target.value)} name="rol_de_usuario" required className="select">
                                         <option value=""></option>
                                         <option value="adminstrador">Administrador</option>
                                         <option value="vendedor">Vendedor</option>

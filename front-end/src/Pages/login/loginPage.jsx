@@ -13,6 +13,7 @@ function LoginPage() {
         try{
             const response = await fetch(`http://localhost:3001/auth?email=${user.email}`);
             const jsonResponse = await response.json();
+            // console.log(user);
             return jsonResponse.data;
         }catch(e){
             console.log(e);
@@ -21,6 +22,8 @@ function LoginPage() {
     }
 
     const addUser = async() => {
+        let idGoogle = user.sub;
+        idGoogle = parseInt(idGoogle.slice(14));
         const response = await fetch('http://localhost:3001/add-user',{
         method: 'POST',
         headers: {
@@ -28,17 +31,19 @@ function LoginPage() {
             'Content-Type': 'application/json'},
         body: JSON.stringify({
             nombre:user.name,
-            id:0,
+            id:idGoogle,
             telefono:0,
             email:user.email,            
             rol:'usuario',
             estado:'pendiente'
         })})
+        console.log(response);
     }
 
     const grantAccess = async () =>{
         if(isAuthenticated){
             const userData = await validateUserRole();
+            // console.log(userData.rol,userData.estado)
             if(userData){
                 setValidUser((userData.rol !== 'usuario'&& userData.estado ==='autorizado') ? 1 : 2);
             }else{
