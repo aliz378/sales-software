@@ -1,9 +1,16 @@
-import React from 'react'
+import React {useState} from 'react'
 import Navbar from '../../shared/components/navbar'
 import Sidebar from '../../shared/components/sidebar'
+import { useState } from 'react'
+
 
 const RegistroVentas = () => {
     const name = 'Administrador 01'
+    const [idCliente, setIdCliente] = useState (0);
+    const [nombreCliente, setNombreCliente] = useState ("");
+    const addIdCLiente = async () => {
+        const response = await fetch(http://localhost:3001/add-venta)
+    }
     return (
         <div className='profile'>
             <Navbar userName={name}></Navbar>
@@ -21,7 +28,7 @@ const RegistroVentas = () => {
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">ID Cliente</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="IdCliente" placeholder="Número identificación Cliente"/>
+                        <input type="number" class="form-control" id="IdCliente" placeholder="Número identificación Cliente" onChange ={ (e) => setIdCliente(e.target.value)}/>
                     </div>
                 </div>
                 <div class="mb-3 row">
